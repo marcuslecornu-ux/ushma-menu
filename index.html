@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Select your menu choices for Ushma's Indian Cooking Class">
+<meta property="og:title" content="Ushma Indian Cooking Class – Menu Choices">
+<meta property="og:description" content="Select your starter, main course and accompaniment or dessert">
+<title>Ushma Indian Cooking Class – Menu Choices</title>
+<style>
+  *, *::before, *::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: #faf8f4;
+    color: #2c2c2a;
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  .page-wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    background: #fff;
+    -webkit-border-radius: 12px;
+    border-radius: 12px;
+    border: 1px solid #e0ddd6;
+    padding: 2.5rem 2.5rem 3rem;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e0ddd6;
+  }
+  .header-ornament {
+    display: block;
+    font-size: 18px;
+    letter-spacing: 14px;
+    color: #B07D3A;
+    margin-bottom: 0.6rem;
+  }
+  .header h1 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #2c2c2a;
+    letter-spacing: 0.3px;
+    line-height: 1.3;
+    margin-bottom: 0.4rem;
+  }
+  .header p {
+    font-size: 12px;
+    color: #888780;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  /* Guest fields */
+  .name-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 14px;
+    margin-bottom: 1.75rem;
+  }
+  .name-row .field-group { -webkit-box-flex: 1; -ms-flex: 1; flex: 1; }
+  .field-group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .field-group label {
+    font-size: 11px;
+    color: #888780;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .field-group input,
+  .field-group textarea {
+    padding: 10px 12px;
+    border: 1px solid #c8c5bc;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: #fff;
+    color: #2c2c2a;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    -webkit-transition: border-color 0.15s, box-shadow 0.15s;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .field-group input:focus,
+  .field-group textarea:focus {
+    border-color: #B07D3A;
+    -webkit-box-shadow: 0 0 0 3px rgba(176,125,58,0.15);
+    box-shadow: 0 0 0 3px rgba(176,125,58,0.15);
+  }
+  .field-group textarea { resize: vertical; min-height: 72px; line-height: 1.5; }
+
+  /* Dividers */
+  .section-divider { height: 1px; background: #e0ddd6; margin: 1.75rem 0; }
+
+  /* Section headers */
+  .section { margin-bottom: 0; }
+  .section-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+  .section-num {
+    width: 28px; height: 28px;
+    -webkit-border-radius: 50%; border-radius: 50%;
+    background: #B07D3A; color: #fff;
+    font-size: 13px; font-weight: 700;
+    display: -webkit-box; display: -ms-flexbox; display: flex;
+    -webkit-box-align: center; -ms-flex-align: center; align-items: center;
+    -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center;
+    -ms-flex-negative: 0; flex-shrink: 0; line-height: 1;
+  }
+  .section-title {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 17px; font-weight: 600; color: #2c2c2a;
+  }
+  .section-sub {
+    font-size: 11px; color: #888780;
+    letter-spacing: 0.8px; text-transform: uppercase; margin-top: 2px;
+  }
+
+  /* Dish grid */
+  .dishes-grid {
+    display: -ms-grid; display: grid;
+    -ms-grid-columns: 1fr 8px 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .dish-option { position: relative; }
+  .dish-option input[type="radio"] { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .dish-label {
+    display: -webkit-box; display: -ms-flexbox; display: flex;
+    -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start;
+    gap: 10px; padding: 12px;
+    border: 1px solid #e0ddd6;
+    -webkit-border-radius: 8px; border-radius: 8px;
+    cursor: pointer; background: #fff; min-height: 52px;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-transition: border-color 0.15s, background-color 0.15s;
+    transition: border-color 0.15s, background-color 0.15s;
+    touch-action: manipulation;
+  }
+  .dish-label:hover { border-color: #B07D3A; background-color: #fdf9f3; }
+  .dish-option input:checked + .dish-label { border: 2px solid #B07D3A; background-color: #fdf8f0; }
+  .check-circle {
+    width: 18px; height: 18px;
+    -webkit-border-radius: 50%; border-radius: 50%;
+    border: 2px solid #c8c5bc;
+    -ms-flex-negative: 0; flex-shrink: 0; margin-top: 1px;
+    -webkit-transition: border-color 0.15s, background-color 0.15s;
+    transition: border-color 0.15s, background-color 0.15s;
+    display: -webkit-box; display: -ms-flexbox; display: flex;
+    -webkit-box-align: center; -ms-flex-align: center; align-items: center;
+    -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center;
+  }
+  .dish-option input:checked + .dish-label .check-circle { background-color: #B07D3A; border-color: #B07D3A; }
+  .check-circle::after {
+    content: ''; width: 6px; height: 6px;
+    -webkit-border-radius: 50%; border-radius: 50%;
+    background: #fff; opacity: 0;
+    -webkit-transition: opacity 0.15s; transition: opacity 0.15s;
+  }
+  .dish-option input:checked + .dish-label .check-circle::after { opacity: 1; }
+  .dish-text { font-size: 14px; color: #2c2c2a; line-height: 1.4; font-weight: 400; }
+  .dish-note { display: block; font-size: 11px; color: #B07D3A; margin-top: 3px; font-style: italic; }
+
+  /* Rice panel */
+  .rice-panel {
+    display: none;
+    margin-top: 10px;
+    padding: 14px 16px;
+    background: #fdf8f0;
+    border: 1px solid #e8d9b8;
+    -webkit-border-radius: 8px; border-radius: 8px;
+  }
+  .rice-panel.visible { display: block; }
+  .rice-panel-label {
+    font-size: 12px; font-weight: 700; color: #7a5520;
+    letter-spacing: 0.8px; text-transform: uppercase;
+    margin-bottom: 10px;
+    display: -webkit-box; display: -ms-flexbox; display: flex;
+    -webkit-box-align: center; -ms-flex-align: center; align-items: center;
+    gap: 7px;
+  }
+  .rice-panel-label::before {
+    content: ''; display: inline-block;
+    width: 8px; height: 8px;
+    -webkit-border-radius: 50%; border-radius: 50%;
+    background: #B07D3A; -ms-flex-negative: 0; flex-shrink: 0;
+  }
+  .rice-options {
+    display: -webkit-box; display: -ms-flexbox; display: flex;
+    -ms-flex-wrap: wrap; flex-wrap: wrap; gap: 8px;
+  }
+  .rice-option { position: relative; }
+  .rice-option input[type="radio"] { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .rice-label {
+    display: inline-block; padding: 7px 14px;
+    border: 1px solid #d4b87a;
+    -webkit-border-radius: 100px; border-radius: 100px;
+    font-size: 13px; color: #7a5520;
+    cursor: pointer; background: #fff;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+    touch-action: manipulation; white-space: nowrap;
+  }
+  .rice-label:hover { background-color: #faebd0; border-color: #B07D3A; }
+  .rice-option input:checked + .rice-label { background-color: #B07D3A; border-color: #B07D3A; color: #fff; }
+
+  .rice-change-link {
+    display: inline-block; margin-top: 10px;
+    font-size: 13px; color: #B07D3A;
+    cursor: pointer; background: none; border: none; padding: 0;
+    text-decoration: underline;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  /* Tabs */
+  .choice-tabs {
+    display: -webkit-box; display: -ms-flexbox; display: flex;
+    gap: 8px; margin-bottom: 1rem;
+  }
+  .tab-btn {
+    padding: 8px 18px; border: 1px solid #c8c5bc;
+    -webkit-border-radius: 100px; border-radius: 100px;
+    background: #fff; font-size: 12px; color: #888780;
+    cursor: pointer; letter-spacing: 0.6px; text-transform: uppercase;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600; -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    -webkit-transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+    -webkit-appearance: none; appearance: none;
+  }
+  .tab-btn.active { background-color: #B07D3A; border-color: #B07D3A; color: #fff; }
+  .tab-btn:hover:not(.active) { border-color: #B07D3A; color: #B07D3A; }
+  .tab-content { display: none; }
+  .tab-content.visible { display: block; }
+
+  /* Submit */
+  .notes-row { margin-bottom: 1.5rem; }
+  .submit-area {
+    display: -webkit-box; display: -ms-flexbox; display: flex;
+    -webkit-box-orient: vertical; -webkit-box-direction: normal;
+    -ms-flex-direction: column; flex-direction: column;
+    -webkit-box-align: center; -ms-flex-align: center; align-items: center; gap: 10px;
+  }
+  .validation-msg { font-size: 13px; color: #c0392b; text-align: center; min-height: 20px; }
+  .submit-btn {
+    width: 100%; padding: 15px 24px; background: #B07D3A; color: #fff;
+    border: none; -webkit-border-radius: 8px; border-radius: 8px;
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation; -webkit-appearance: none; appearance: none;
+    -webkit-transition: background-color 0.2s; transition: background-color 0.2s;
+  }
+  .submit-btn:hover { background-color: #9a6c2e; }
+  .submit-btn:active { background-color: #7e5924; }
+
+  /* Success */
+  .success-msg {
+    display: none; text-align: center; padding: 2rem 1.5rem;
+    background: #fdf8f0; -webkit-border-radius: 12px; border-radius: 12px;
+    border: 1px solid #e0ddd6; margin-top: 1rem;
+  }
+  .success-icon {
+    width: 48px; height: 48px; -webkit-border-radius: 50%; border-radius: 50%;
+    background: #B07D3A; color: #fff; font-size: 24px;
+    display: -webkit-box; display: -ms-flexbox; display: flex;
+    -webkit-box-align: center; -ms-flex-align: center; align-items: center;
+    -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center;
+    margin: 0 auto 1rem; line-height: 1;
+  }
+  .success-msg h2 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 20px; font-weight: 600; color: #2c2c2a; margin-bottom: 0.5rem;
+  }
+  .success-msg p { font-size: 14px; color: #888780; line-height: 1.6; }
+
+  /* Footer */
+  .page-footer { text-align: center; margin-top: 2rem; font-size: 12px; color: #b4b2a9; }
+
+  /* Responsive */
+  @media (max-width: 520px) {
+    .page-wrap { padding: 1.5rem 1rem 2rem; }
+    .header h1 { font-size: 22px; }
+    .name-row {
+      -webkit-box-orient: vertical; -webkit-box-direction: normal;
+      -ms-flex-direction: column; flex-direction: column;
+    }
+    .dishes-grid { -ms-grid-columns: 1fr; grid-template-columns: 1fr; }
+    .rice-options { gap: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+  <div class="header">
+    <span class="header-ornament">&#10022; &#10022; &#10022;</span>
+    <h1>Ushma Indian Cooking Class</h1>
+    <p>Select your menu choices below</p>
+  </div>
+
+  <div id="main-form">
+
+    <!-- Guest details -->
+    <div class="name-row">
+      <div class="field-group">
+        <label for="guest-name">Your name</label>
+        <input type="text" id="guest-name" placeholder="Full name" autocomplete="name">
+      </div>
+      <div class="field-group">
+        <label for="guest-email">Email address</label>
+        <input type="email" id="guest-email" placeholder="your@email.com" autocomplete="email">
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- ── Section 1: Starters ── -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <div>
+          <div class="section-title">Starter</div>
+          <div class="section-sub">Choose one</div>
+        </div>
+      </div>
+      <div class="dishes-grid">
+        <div class="dish-option">
+          <input type="radio" name="starter" id="s1" value="Tandoori King Prawns in a poppodum basket and mint &amp; yoghurt chutney">
+          <label class="dish-label" for="s1"><div class="check-circle"></div><span class="dish-text">Tandoori King Prawns in a poppodum basket and mint &amp; yoghurt chutney</span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="starter" id="s2" value="Coconut chilli prawns with cumin puris">
+          <label class="dish-label" for="s2"><div class="check-circle"></div><span class="dish-text">Coconut chilli prawns with cumin puris</span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="starter" id="s3" value="Assorted bhajis with coconut chutney">
+          <label class="dish-label" for="s3"><div class="check-circle"></div><span class="dish-text">Assorted bhajis with coconut chutney</span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="starter" id="s4" value="Spicy baked sea bass with mango salsa">
+          <label class="dish-label" for="s4"><div class="check-circle"></div><span class="dish-text">Spicy baked sea bass with mango salsa</span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="starter" id="s5" value="Crab samosas with kumquat chutney">
+          <label class="dish-label" for="s5"><div class="check-circle"></div><span class="dish-text">Crab samosas with kumquat chutney</span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="starter" id="s6" value="Veg samosas">
+          <label class="dish-label" for="s6"><div class="check-circle"></div><span class="dish-text">Veg samosas</span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="starter" id="s7" value="Assorted bhajis with tomato chutney">
+          <label class="dish-label" for="s7"><div class="check-circle"></div><span class="dish-text">Assorted bhajis with tomato chutney</span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="starter" id="s8" value="Onion bhajis with grated sweet potato &amp; spinach">
+          <label class="dish-label" for="s8"><div class="check-circle"></div><span class="dish-text">Onion bhajis with grated sweet potato &amp; spinach</span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="starter" id="s9" value="Tarka dhal with parathas">
+          <label class="dish-label" for="s9"><div class="check-circle"></div><span class="dish-text">Tarka dhal with parathas</span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="starter" id="s10" value="Lentil bhajis with coconut chutney">
+          <label class="dish-label" for="s10"><div class="check-circle"></div><span class="dish-text">Lentil bhajis with coconut chutney</span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="starter" id="s11" value="Orange glazed prawns with smoky masala">
+          <label class="dish-label" for="s11"><div class="check-circle"></div><span class="dish-text">Orange glazed prawns with smoky masala</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- ── Section 2: Mains ── -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <div>
+          <div class="section-title">Main course</div>
+          <div class="section-sub">Choose one &mdash; rice options shown per dish</div>
+        </div>
+      </div>
+      <div class="dishes-grid">
+        <div class="dish-option">
+          <input type="radio" name="main" id="m1" value="Aromatic chicken curry" data-rice="saffron">
+          <label class="dish-label" for="m1"><div class="check-circle"></div><span class="dish-text">Aromatic chicken curry<span class="dish-note">Served with saffron rice</span></span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="main" id="m3" value="Ushma's lamb biryani with cucumber and mint raita" data-rice="none">
+          <label class="dish-label" for="m3"><div class="check-circle"></div><span class="dish-text">Ushma's lamb biryani with cucumber and mint raita<span class="dish-note">Rice included in dish</span></span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="main" id="m4" value="Chicken Cafreal" data-rice="coconut">
+          <label class="dish-label" for="m4"><div class="check-circle"></div><span class="dish-text">Chicken Cafreal<span class="dish-note">Served with coconut rice</span></span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="main" id="m5" value="Vegetable dhansak" data-rice="plain">
+          <label class="dish-label" for="m5"><div class="check-circle"></div><span class="dish-text">Vegetable dhansak<span class="dish-note">Served with plain rice</span></span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="main" id="m6" value="Ushma's chicken tikka masala with bhaturas" data-rice="none">
+          <label class="dish-label" for="m6"><div class="check-circle"></div><span class="dish-text">Ushma's chicken tikka masala with bhaturas<span class="dish-note">Served with bhaturas</span></span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="main" id="m7" value="Butter chicken curry" data-rice="pilau">
+          <label class="dish-label" for="m7"><div class="check-circle"></div><span class="dish-text">Butter chicken curry<span class="dish-note">Served with pilau rice</span></span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="main" id="m8" value="Ushma's lamb lasagna" data-rice="none">
+          <label class="dish-label" for="m8"><div class="check-circle"></div><span class="dish-text">Ushma's lamb lasagna<span class="dish-note">No rice</span></span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="main" id="m9" value="Orange glazed prawns with smoky masala" data-rice="choice">
+          <label class="dish-label" for="m9"><div class="check-circle"></div><span class="dish-text">Orange glazed prawns with smoky masala<span class="dish-note">Choose your rice below</span></span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="main" id="m10" value="Mari chicken curry" data-rice="plain">
+          <label class="dish-label" for="m10"><div class="check-circle"></div><span class="dish-text">Mari chicken curry<span class="dish-note">Served with plain rice</span></span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="main" id="m11" value="Lamb kofta curry" data-rice="plain">
+          <label class="dish-label" for="m11"><div class="check-circle"></div><span class="dish-text">Lamb kofta curry<span class="dish-note">Served with plain rice</span></span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="main" id="m12" value="Dhaba Chicken Curry (no tomato)" data-rice="choice">
+          <label class="dish-label" for="m12"><div class="check-circle"></div><span class="dish-text">Dhaba Chicken Curry (no tomato)<span class="dish-note">Choose your rice below</span></span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="main" id="m13" value="Chicken Jhalfrazi" data-rice="saffron">
+          <label class="dish-label" for="m13"><div class="check-circle"></div><span class="dish-text">Chicken Jhalfrazi<span class="dish-note">Served with saffron rice</span></span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="main" id="m14" value="Keralan Spicy fish curry with Ushma's seafood masala" data-rice="boiled">
+          <label class="dish-label" for="m14"><div class="check-circle"></div><span class="dish-text">Keralan Spicy fish curry with Ushma's seafood masala<span class="dish-note">Served with boiled rice</span></span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="main" id="m18" value="Tangy Alappuzha fish curry" data-rice="boiled">
+          <label class="dish-label" for="m18"><div class="check-circle"></div><span class="dish-text">Tangy Alappuzha fish curry<span class="dish-note">Served with boiled rice</span></span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="main" id="m15" value="Chicken dhansak" data-rice="plain">
+          <label class="dish-label" for="m15"><div class="check-circle"></div><span class="dish-text">Chicken dhansak<span class="dish-note">Served with plain rice</span></span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="main" id="m16" value="Jerk chicken" data-rice="choice">
+          <label class="dish-label" for="m16"><div class="check-circle"></div><span class="dish-text">Jerk chicken<span class="dish-note">Choose your rice below</span></span></label>
+        </div>
+        <div class="dish-option">
+          <input type="radio" name="main" id="m17" value="Orange glazed salmon with smoky masala" data-rice="choice">
+          <label class="dish-label" for="m17"><div class="check-circle"></div><span class="dish-text">Orange glazed salmon with smoky masala<span class="dish-note">Choose your rice below</span></span></label>
+        </div>
+      </div>
+
+      <!-- Required rice choice -->
+      <div class="rice-panel" id="rice-required-panel">
+        <div class="rice-panel-label">Choose your rice</div>
+        <div class="rice-options">
+          <div class="rice-option"><input type="radio" name="rice-choice" id="rc1" value="plain rice"><label class="rice-label" for="rc1">Plain rice</label></div>
+          <div class="rice-option"><input type="radio" name="rice-choice" id="rc2" value="pilau rice"><label class="rice-label" for="rc2">Pilau rice</label></div>
+          <div class="rice-option"><input type="radio" name="rice-choice" id="rc3" value="saffron rice"><label class="rice-label" for="rc3">Saffron rice</label></div>
+          <div class="rice-option"><input type="radio" name="rice-choice" id="rc4" value="coconut rice"><label class="rice-label" for="rc4">Coconut rice</label></div>
+        </div>
+      </div>
+
+      <!-- Optional rice override -->
+      <div id="rice-override-wrap" style="display:none;">
+        <button type="button" class="rice-change-link" id="rice-change-btn">Prefer a different rice? Tap to change</button>
+        <div class="rice-panel" id="rice-override-panel">
+          <div class="rice-panel-label">Choose a different rice</div>
+          <div class="rice-options">
+            <div class="rice-option"><input type="radio" name="rice-override" id="ro1" value="plain rice"><label class="rice-label" for="ro1">Plain rice</label></div>
+            <div class="rice-option"><input type="radio" name="rice-override" id="ro2" value="pilau rice"><label class="rice-label" for="ro2">Pilau rice</label></div>
+            <div class="rice-option"><input type="radio" name="rice-override" id="ro3" value="saffron rice"><label class="rice-label" for="ro3">Saffron rice</label></div>
+            <div class="rice-option"><input type="radio" name="rice-override" id="ro4" value="coconut rice"><label class="rice-label" for="ro4">Coconut rice</label></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- ── Section 3: Accompaniments / Desserts ── -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <div>
+          <div class="section-title">Accompaniment or dessert</div>
+          <div class="section-sub">Choose one category, then one dish</div>
+        </div>
+      </div>
+      <div class="choice-tabs">
+        <button type="button" class="tab-btn active" data-tab="sides">Accompaniments</button>
+        <button type="button" class="tab-btn" data-tab="desserts">Desserts</button>
+      </div>
+
+      <div id="tab-sides" class="tab-content visible">
+        <div class="dishes-grid">
+          <div class="dish-option">
+            <input type="radio" name="extra" id="sd1" value="Aloo gobi Gujarati style">
+            <label class="dish-label" for="sd1"><div class="check-circle"></div><span class="dish-text">Aloo gobi Gujarati style</span></label>
+          </div>
+          <div class="dish-option">
+            <input type="radio" name="extra" id="sd2" value="Jersey Bombay potatoes">
+            <label class="dish-label" for="sd2"><div class="check-circle"></div><span class="dish-text">Jersey Bombay potatoes</span></label>
+          </div>
+          <div class="dish-option">
+            <input type="radio" name="extra" id="sd3" value="Batata Ravaiya nu shaak (Baby aubergines &amp; new potatoes stuffed with spices)">
+            <label class="dish-label" for="sd3"><div class="check-circle"></div><span class="dish-text">Batata Ravaiya nu shaak (Baby aubergines &amp; new potatoes stuffed with spices)</span></label>
+          </div>
+          <div class="dish-option">
+            <input type="radio" name="extra" id="sd4" value="Saag Aloo (Fresh baby spinach with Jersey New potatoes)">
+            <label class="dish-label" for="sd4"><div class="check-circle"></div><span class="dish-text">Saag Aloo (Fresh baby spinach with Jersey New potatoes)</span></label>
+          </div>
+          <div class="dish-option">
+            <input type="radio" name="extra" id="sd5" value="Gujarati style mushroom and aubergine bhaji">
+            <label class="dish-label" for="sd5"><div class="check-circle"></div><span class="dish-text">Gujarati style mushroom and aubergine bhaji</span></label>
+          </div>
+          <div class="dish-option">
+            <input type="radio" name="extra" id="sd6" value="Tarka dhal">
+            <label class="dish-label" for="sd6"><div class="check-circle"></div><span class="dish-text">Tarka dhal</span></label>
+          </div>
+          <div class="dish-option">
+            <input type="radio" name="extra" id="sd7" value="Jersey royals with asparagus">
+            <label class="dish-label" for="sd7"><div class="check-circle"></div><span class="dish-text">Jersey royals with asparagus</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-desserts" class="tab-content">
+        <div class="dishes-grid">
+          <div class="dish-option">
+            <input type="radio" name="extra" id="d1" value="Kulfi ice cream">
+            <label class="dish-label" for="d1"><div class="check-circle"></div><span class="dish-text">Kulfi ice cream</span></label>
+          </div>
+          <div class="dish-option">
+            <input type="radio" name="extra" id="d2" value="Kashmiri apple dessert">
+            <label class="dish-label" for="d2"><div class="check-circle"></div><span class="dish-text">Kashmiri apple dessert</span></label>
+          </div>
+          <div class="dish-option">
+            <input type="radio" name="extra" id="d3" value="Ushma's bread and butter pudding">
+            <label class="dish-label" for="d3"><div class="check-circle"></div><span class="dish-text">Ushma's bread and butter pudding</span></label>
+          </div>
+          <div class="dish-option">
+            <input type="radio" name="extra" id="d4" value="Mango Srikhand">
+            <label class="dish-label" for="d4"><div class="check-circle"></div><span class="dish-text">Mango Srikhand</span></label>
+          </div>
+          <div class="dish-option">
+            <input type="radio" name="extra" id="d5" value="Pistachio/Cardamom Kulfi">
+            <label class="dish-label" for="d5"><div class="check-circle"></div><span class="dish-text">Pistachio/Cardamom Kulfi</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="notes-row">
+      <div class="field-group">
+        <label for="guest-notes">Dietary requirements or notes</label>
+        <textarea id="guest-notes" placeholder="e.g. nut allergy, vegan, gluten-free..."></textarea>
+      </div>
+    </div>
+
+    <div class="submit-area">
+      <div class="validation-msg" id="val-msg"></div>
+      <button type="button" class="submit-btn" id="submit-btn">Send my menu choices</button>
+    </div>
+
+  </div>
+
+  <div class="success-msg" id="success-msg">
+    <div class="success-icon">&#10003;</div>
+    <h2>Your choices are ready!</h2>
+    <p style="font-size:14px; color:#888780; line-height:1.6; margin-bottom:0.25rem;">Tap below to open your email app, or copy your choices and paste them into an email to <strong style="color:#2c2c2a;">ushmaspatel@gmail.com</strong></p>
+
+    <a id="mailto-link" href="#" style="display:block; margin:1.25rem 0 0.75rem; padding:13px 20px; background:#B07D3A; color:#fff; border-radius:8px; text-decoration:none; font-size:14px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; -webkit-tap-highlight-color:transparent; touch-action:manipulation; text-align:center;">Open email app</a>
+
+    <button type="button" id="copy-btn" style="display:block; width:100%; padding:13px 20px; background:#fff; color:#B07D3A; border:2px solid #B07D3A; border-radius:8px; font-size:14px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; -webkit-tap-highlight-color:transparent; touch-action:manipulation; -webkit-appearance:none; appearance:none; margin-bottom:0.75rem;">Copy my choices</button>
+
+    <div id="copy-confirm" style="display:none; font-size:13px; color:#3a7a3a; margin-bottom:0.75rem; font-weight:600;">&#10003; Copied! Paste into an email to ushmaspatel@gmail.com</div>
+
+    <div id="email-text-wrap" style="display:none; text-align:left; margin-top:0.75rem;">
+      <p style="font-size:11px; color:#888780; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Your choices</p>
+      <pre id="email-text" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:13px; line-height:1.6; color:#2c2c2a; background:#faf8f4; border:1px solid #e0ddd6; border-radius:8px; padding:12px 14px; white-space:pre-wrap; word-break:break-word;"></pre>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">Ushma Indian Cooking Class &nbsp;&middot;&nbsp; ushmaspatel@gmail.com</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  var riceOverrideOpen = false;
+
+  var riceDefaults = {
+    'saffron': 'Saffron rice',
+    'pilau':   'Pilau rice',
+    'plain':   'Plain rice',
+    'coconut': 'Coconut rice',
+    'boiled':  'Boiled rice'
+  };
+
+  // ── Wire up main radio change listeners ──
+  var mainRadios = document.querySelectorAll('input[name="main"]');
+  for (var i = 0; i < mainRadios.length; i++) {
+    mainRadios[i].addEventListener('change', handleMainChange);
+  }
+
+  // ── Wire up tab buttons ──
+  var tabBtns = document.querySelectorAll('.tab-btn');
+  for (var t = 0; t < tabBtns.length; t++) {
+    tabBtns[t].addEventListener('click', function() {
+      var tab = this.getAttribute('data-tab');
+      for (var b = 0; b < tabBtns.length; b++) { tabBtns[b].classList.remove('active'); }
+      this.classList.add('active');
+      document.getElementById('tab-sides').classList.remove('visible');
+      document.getElementById('tab-desserts').classList.remove('visible');
+      document.getElementById('tab-' + tab).classList.add('visible');
+    });
+  }
+
+  // ── Wire up submit button ──
+  document.getElementById('submit-btn').addEventListener('click', sendEmail);
+
+  // ── Wire up rice change button ──
+  document.getElementById('rice-change-btn').addEventListener('click', toggleRiceOverride);
+
+  // ── Wire up copy button ──
+  document.getElementById('copy-btn').addEventListener('click', copyChoices);
+
+  function handleMainChange() {
+    var checked = document.querySelector('input[name="main"]:checked');
+    if (!checked) return;
+    var riceType = checked.getAttribute('data-rice');
+
+    var reqPanel      = document.getElementById('rice-required-panel');
+    var overrideWrap  = document.getElementById('rice-override-wrap');
+    var overridePanel = document.getElementById('rice-override-panel');
+
+    riceOverrideOpen = false;
+    overridePanel.classList.remove('visible');
+    document.getElementById('rice-change-btn').textContent = 'Prefer a different rice? Tap to change';
+
+    var ors = document.querySelectorAll('input[name="rice-override"]');
+    for (var i = 0; i < ors.length; i++) { ors[i].checked = false; }
+    var rcs = document.querySelectorAll('input[name="rice-choice"]');
+    for (var j = 0; j < rcs.length; j++) { rcs[j].checked = false; }
+
+    if (riceType === 'none') {
+      reqPanel.classList.remove('visible');
+      overrideWrap.style.display = 'none';
+    } else if (riceType === 'choice') {
+      reqPanel.classList.add('visible');
+      overrideWrap.style.display = 'none';
+    } else {
+      reqPanel.classList.remove('visible');
+      overrideWrap.style.display = 'block';
+    }
+  }
+
+  function toggleRiceOverride() {
+    riceOverrideOpen = !riceOverrideOpen;
+    var panel = document.getElementById('rice-override-panel');
+    var btn   = document.getElementById('rice-change-btn');
+    if (riceOverrideOpen) {
+      panel.classList.add('visible');
+      btn.textContent = 'Keep the default rice';
+    } else {
+      panel.classList.remove('visible');
+      btn.textContent = 'Prefer a different rice? Tap to change';
+      var ors = document.querySelectorAll('input[name="rice-override"]');
+      for (var i = 0; i < ors.length; i++) { ors[i].checked = false; }
+    }
+  }
+
+  function sendEmail() {
+    var name    = document.getElementById('guest-name').value.trim();
+    var email   = document.getElementById('guest-email').value.trim();
+    var starter = document.querySelector('input[name="starter"]:checked');
+    var main    = document.querySelector('input[name="main"]:checked');
+    var extra   = document.querySelector('input[name="extra"]:checked');
+    var notes   = document.getElementById('guest-notes').value.trim();
+    var msg     = document.getElementById('val-msg');
+
+    if (!name)                          { msg.textContent = 'Please enter your name.'; return; }
+    if (!email || !email.includes('@')) { msg.textContent = 'Please enter a valid email address.'; return; }
+    if (!starter)                       { msg.textContent = 'Please select a starter.'; return; }
+    if (!main)                          { msg.textContent = 'Please select a main course.'; return; }
+
+    var riceType = main.getAttribute('data-rice');
+    var riceDesc = '';
+
+    if (riceType === 'choice') {
+      var rc = document.querySelector('input[name="rice-choice"]:checked');
+      if (!rc) { msg.textContent = 'Please choose your rice for this dish.'; return; }
+      riceDesc = rc.value;
+    } else if (riceType !== 'none') {
+      var ro = document.querySelector('input[name="rice-override"]:checked');
+      riceDesc = ro ? ro.value : riceDefaults[riceType];
+    }
+
+    if (!extra) { msg.textContent = 'Please select an accompaniment or dessert.'; return; }
+    msg.textContent = '';
+
+    var mainDesc = main.value + (riceDesc ? ' with ' + riceDesc : '');
+    var sideIds  = ['sd1','sd2','sd3','sd4','sd5','sd6','sd7'];
+    var isSide   = sideIds.indexOf(extra.id) !== -1;
+
+    var body =
+      'Dear Ushma,' +
+      '\n\nI would like to submit my menu choices for the Indian Cooking Class.' +
+      '\n\nGuest name: '  + name  +
+      '\nGuest email: '    + email +
+      '\n\nSTARTER\n'    + starter.value +
+      '\n\nMAIN COURSE\n' + mainDesc +
+      '\n\n' + (isSide ? 'ACCOMPANIMENT' : 'DESSERT') + '\n' + extra.value +
+      (notes ? '\n\nDIETARY REQUIREMENTS / NOTES\n' + notes : '') +
+      '\n\nKind regards,\n' + name;
+
+    var subject = 'Menu Choices - Ushma Indian Cooking Class - ' + name;
+    var mailto  = 'mailto:ushmaspatel@gmail.com?subject=' +
+                  encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+
+    window._emailBody = body;
+
+    document.getElementById('mailto-link').href = mailto;
+    document.getElementById('main-form').style.display   = 'none';
+    document.getElementById('success-msg').style.display = 'block';
+    window.scrollTo(0, 0);
+  }
+
+  function copyChoices() {
+    var text = window._emailBody || '';
+    var btn  = document.getElementById('copy-btn');
+    var conf = document.getElementById('copy-confirm');
+    var wrap = document.getElementById('email-text-wrap');
+    var pre  = document.getElementById('email-text');
+
+    pre.textContent    = text;
+    wrap.style.display = 'block';
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        btn.textContent        = 'Copied!';
+        conf.style.display     = 'block';
+      }).catch(function() { fallbackCopy(text, btn, conf); });
+    } else {
+      fallbackCopy(text, btn, conf);
+    }
+  }
+
+  function fallbackCopy(text, btn, conf) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try {
+      document.execCommand('copy');
+      btn.textContent    = 'Copied!';
+      conf.style.display = 'block';
+    } catch(e) {
+      conf.style.display = 'none';
+    }
+    document.body.removeChild(ta);
+  }
+
+}); // end DOMContentLoaded
+</script>
+
+</body>
+</html>
